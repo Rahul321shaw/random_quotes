@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no,maximum-scale=1, user-scalable=0">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+</head>
+<body>
+<style>
+  body{
+    background-color: black;
+  }
+</style>
+<div class="container">
+    <div class="row" align="center" style="margin-top: 200px;">
+        <div class="col-sm-12">
+          <h3 id="content" style="color: white;"></h3><br>
+          <span id="author" style="font-size: 20px; float: right;"></span><br><br>
+          <button onclick="getNewQuote()" style="float: right;" class="btn  btn-lg btn-outline-dark">New Quote</button>
+        <h1 id="ids"></h1>
+        </div>
+    </div>
+</div>
+</body>
+<script src = "jquery-3.1.1.min.js"></script>
+<script src = "js/bootstrap.js"></script>
+<script src = "js/bootstrap.min.js"></script>
+<script>
+var obj,num;
+var xmlhttp = new XMLHttpRequest();
+ xmlhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+          obj = JSON.parse(this.responseText);
+          getNewQuote();
+        }
+};
+xmlhttp.open("GET", "https://random-quote-generator.herokuapp.com/api/quotes/", true);
+xmlhttp.send();
+function getNewQuote(argument) {
+
+            num = Math.floor(Math.random() * (obj.length-1));
+           document.getElementById("content").innerHTML = '<span style="font-size:30px;">&ldquo;\t</span>'+obj[num].quote+'<span style="font-size:30px;">\t&bdquo;</span>';
+           document.getElementById("author").innerHTML = "&mdash; "+obj[num].author;
+
+}
+
+</script>
+z
+</html>
